@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+    Todo:
+    Load a quiz (.quizJSON) [click and drag? paste quizJSON contents?]
+    Add Question
+    Add Answer
+    Export quiz (.quizJSON download, copy paste)
+    Localstorage saving (cookies n shit)
+-->
+<html>
+<body>
+
+    <form id="questionForm" onsubmit="addQuestion(event)">
+        <input id="questionInput" type="text" autofocus />
+        <input type="submit" value="Add Question" />
+    </form>
+
+
+    <div id="quiz">
+        
+    </div>
+
+    <div id="rawQuizContainer"  style="display: none;">
+    <p>Raw Quiz Data (JSON):</p>
+    <textarea id="rawQuiz"> 
+
+    </textarea>
+    </div>
+</body>
+<script>
+    var currentQuiz = JSON.parse(localStorage["currentQuiz"]);
+    loadQuiz(currentQuiz);
+    console.log(currentQuiz);
+
+    // dispay on the page quiz data, based on raw data
+    function loadQuiz(quizJSON){
+        console.log(quizJSON);
+        var quiz = document.getElementById("quiz");
+        var rawQuiz = document.getElementById("rawQuiz");
+        // display the raw data
+        rawQuiz.innerText = JSON.stringify(quizJSON);
+        document.getElementById("rawQuizContainer").style.display = "inline";   
+        
+        // for each question, display all quesitons
+        for(i=0;i<quizJSON["questions"].length;i++)
+        {
+            console.log(quizJSON["questions"][i]);
+            var q = document.createElement("p")
+            q.innerText = quizJSON["questions"][i]
+            quiz.appendChild(q);
+            // display all answers to that quesiton
+        }
+    }
+
+    function addQuestion(event){
+        event.preventDefault();
+        var questionInput = document.getElementById("questionInput").value;
+        console.log("Adding " + questionInput);
+        // if there is no quiz...
+        if(currentQuiz == null) {
+            // create blank current quiz
+            var currentQuiz = {};
+            currentQuiz["questions"] = []
+        }
+        currentQuiz["questions"].push(questionInput);
+        loadQuiz(currentQuiz);
+        localStorage["currentQuiz"] = JSON.stringify(currentQuiz);
+    }
+</script>
+</html>

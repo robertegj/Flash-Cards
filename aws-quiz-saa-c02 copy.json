@@ -1,0 +1,21 @@
+{
+    "questions" : [ 
+        {
+        "question" : "You can use either CodeDeploy or an AWS Systems Manager command document to deploy a Lambda application",
+        "answers" : {
+            "correctAnswer" :  "False",
+            "wrongAnswer" : "True"
+        },
+        "explanation" : "lorem ipsum i guess"
+    },
+    {
+        "question" : "You can use either CodeDeploy or an AWS Systems Manager command document to deploy a Lambda application",
+        "answers" : {
+            "correctAnswer" :  "False",
+            "wrongAnswer" : "True"
+        },
+        "explanation" : "lorem ipsum i guess"
+    }
+    ]
+}
+

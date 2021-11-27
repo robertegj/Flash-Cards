@@ -1,0 +1,27 @@
+{
+    "questions" : [ 
+        {
+        "question" : "How do you prevent default behavior on forms (i.e. no reload on submit)?",
+        "answers" : {
+            "correctAnswer" :  "False",
+            "wrongAnswer" : "True"
+        },
+        "explanation" : "lorem ipsum i guess"
+    },
+    {
+        "question" : "You can use either CodeDeploy or an AWS Systems Manager command document to deploy a Lambda application",
+        "answers" : {
+            "correctAnswer" :  "False",
+            "wrongAnswer" : "True"
+        },
+        "explanation" : "lorem ipsum i guess"
+    }
+    ]
+}
+
+
+
+// how to add element to array in javascript
+// how to get second word in string
+// check if variable is defined
+// create new element in js
