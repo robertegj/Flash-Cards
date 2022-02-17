@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+    Todo:
+    Load a quiz (.quizJSON) [click and drag? paste quizJSON contents?]
+    Add Question
+    Add Answer
+    Export quiz (.quizJSON download, copy paste)
+    Localstorage saving (cookies n shit)
+-->
+<html>
+<body>
+
+    <form id="questionForm" onsubmit="addQuestion(event)">
+        <input id="questionInput" type="text" autofocus />
+        <input type="submit" value="Add Question" />
+    </form>
+
+
+    <div id="quiz">
+        
+    </div>
+
+    <div id="rawQuizContainer"  style="display: none;">
+    <p>Raw Quiz Data (JSON):</p>
+    <textarea id="rawQuiz"> 
+
+    </textarea>
+    </div>
+</body>
+<script>
+
+</script>
+</html>
