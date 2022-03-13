@@ -1,1 +1,1 @@
-[https://robertegj.github.io/Flash-Cards/](View Live)
+[View Live](https://robertegj.github.io/Flash-Cards/)
