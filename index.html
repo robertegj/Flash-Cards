@@ -1,70 +1,170 @@
 <!DOCTYPE html>
-<!--
-    Todo:
-    Load a quiz (.quizJSON) [click and drag? paste quizJSON contents?]
-    Add Question
-    Add Answer
-    Export quiz (.quizJSON download, copy paste)
-    Localstorage saving (cookies n shit)
--->
 <html>
+<head>
+<style>
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+#card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#title {
+    text-align: center;
+}
+#quizInput {
+    width: 100%;
+    height: 50vh;
+}
+.card {
+    border: 1px solid black;
+    box-shadow: 3px 4px 4px 1px rgba(55,55,55, 0.5);
+    border-radius: 6px;
+    width: 90vw;
+    padding: 1em;
+    margin: 1em;
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+h1 {
+    text-align: center;
+}
+</style>
+</head>
 <body>
 
-    <form id="questionForm" onsubmit="addQuestion(event)">
-        <input id="questionInput" type="text" autofocus />
-        <input type="submit" value="Add Question" />
-    </form>
-
-
-    <div id="quiz">
-        
+    <div id="availableQuizes">
+        <h1>Available Quizes</h1>
     </div>
 
-    <div id="rawQuizContainer"  style="display: none;">
-    <p>Raw Quiz Data (JSON):</p>
-    <textarea id="rawQuiz"> 
-
-    </textarea>
+    <div id="editQuiz">
+        <h1>Edit/Custom Quiz</h1>
+        <textarea id="quizInput" placeholder="Paste your quiz json here"></textarea>
+        <br />
+        <button onclick="startQuiz()">Start Quiz</button>
     </div>
+
+    <div id="quiz" style="display: none;">
+        <a onclick="changeView(this)" style="float:right;">Multi Card</a>
+        <a onclick="returnHome()">Available Quizes</a>
+        <h1 id="title">Flash Card 3000</h1>
+        <div id="card-deck">
+
+        </div>
+    </div>
+
 </body>
 <script>
-    var currentQuiz = JSON.parse(localStorage["currentQuiz"]);
+
+// Multi Card or Single Card view change function
+function changeView(btn){
+    var cards = document.getElementsByClassName("card");
+    var card_width;
+    if(btn.innerText=="Multi Card"){
+        btn.innerText = "Single Card";
+        card_width = "22vw";
+    } else {
+        btn.innerText = "Multi Card";
+        card_width = "90vw";
+    }
+
+    for(var i=0;i<cards.length;i++){
+        cards[i].style.width = card_width;
+    }
+}
+
+function flipCard(){
+    for(i=0;i<this.children.length;i++){
+        this.children[i].classList.toggle("hidden");
+    }
+}
+
+function startQuiz(){
+    var currentQuiz = document.getElementById("quizInput").value;
     loadQuiz(currentQuiz);
-    console.log(currentQuiz);
+}
 
-    // dispay on the page quiz data, based on raw data
-    function loadQuiz(quizJSON){
-        console.log(quizJSON);
-        var quiz = document.getElementById("quiz");
-        var rawQuiz = document.getElementById("rawQuiz");
-        // display the raw data
-        rawQuiz.innerText = JSON.stringify(quizJSON);
-        document.getElementById("rawQuizContainer").style.display = "inline";   
-        
-        // for each question, display all quesitons
-        for(i=0;i<quizJSON["questions"].length;i++)
+function loadQuiz(availableQuizes) {
+    var availableQuizes = JSON.parse(availableQuizes);
+    console.log(availableQuizes);
+    console.log("Loading Quiz: " + availableQuizes["title"]);
+
+    var deck = document.getElementById("card-deck");
+
+    for (var x = 0; x < availableQuizes["questions"].length; x++){
+        var currentItem = availableQuizes["questions"][x];
+        var quizCard = document.createElement("div");
+        quizCard.className = "card";
+
+        var cardFront = document.createElement("div");
+        cardFront.className = "card-front";
+        cardFront.innerText = Object.keys(currentItem);
+
+        var cardBack = document.createElement("div");
+        cardBack.className = "card-back";
+        cardBack.classList.add("hidden");
+        cardBack.innerText = Object.values(currentItem);
+
+        quizCard.appendChild(cardFront);
+        quizCard.appendChild(cardBack);
+        quizCard.onclick = flipCard;
+        document.getElementById("card-deck").appendChild(quizCard);
+    }
+    document.getElementById("editQuiz").style.display  = "none";
+    document.getElementById("quiz").style.display  = "inline";
+    document.getElementById("title").innerText = availableQuizes["title"];
+
+    console.log("Loaded Quiz: " + availableQuizes["title"]);
+}
+
+function getJSON(url) {
+        var resp ;
+        var xmlHttp ;
+
+        resp  = '' ;
+        xmlHttp = new XMLHttpRequest();
+
+        if(xmlHttp != null)
         {
-            console.log(quizJSON["questions"][i]);
-            var q = document.createElement("p")
-            q.innerText = quizJSON["questions"][i]
-            quiz.appendChild(q);
-            // display all answers to that quesiton
+            xmlHttp.open( "GET", url, false );
+            xmlHttp.send( null );
+            resp = xmlHttp.responseText;
         }
+
+        return resp;
     }
 
-    function addQuestion(event){
-        event.preventDefault();
-        var questionInput = document.getElementById("questionInput").value;
-        console.log("Adding " + questionInput);
-        // if there is no quiz...
-        if(currentQuiz == null) {
-            // create blank current quiz
-            var currentQuiz = {};
-            currentQuiz["questions"] = []
-        }
-        currentQuiz["questions"].push(questionInput);
-        loadQuiz(currentQuiz);
-        localStorage["currentQuiz"] = JSON.stringify(currentQuiz);
+function quizClicked(){
+    console.log(this.innerText);
+    loadQuiz(getJSON(this.innerText));
+    document.getElementById("availableQuizes").style.display = "none";
+}
+
+function loadQuizes(){
+    var availableQuizes = JSON.parse(getJSON('./manifest.json'));
+    console.log(availableQuizes);
+    console.log(typeof(availableQuizes))
+    for (var x = 0; x < availableQuizes["quizes"].length; x++){
+        var currentItem = availableQuizes["quizes"][x];
+        var quizCard = document.createElement("div");
+        quizCard.className = "card";
+        console.log(currentItem);
+        quizCard.innerText = Object.keys(currentItem);
+        quizCard.onclick = quizClicked;
+        document.getElementById("availableQuizes").appendChild(quizCard);
     }
+}
+
+function returnHome(){
+    document.getElementById("quiz").style.display = "none";
+
+    document.getElementById("availableQuizes").style.display = "inline";
+}
+
+loadQuizes();
+
 </script>
 </html>

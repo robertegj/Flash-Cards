@@ -1,0 +1,21 @@
+{
+    "title":"AWS Certified Solutions Architect SAA-C02",
+    "questions" : [
+    { "The Developer Support plan includes support API":"False"}, 
+    { "AWS is responsible for your EC2 network confifuration":"AWS is only responsible for the physical layer."},
+    { "What service is useful for decoupling a monolithic application?":"SQS Simple Queue Service"}, 
+    { "An EC2 app requires CPU socket-based licensing. Which tenancy model should you use?":"Dedicated host"},
+    { "Changing the insance type of an EC2 instance changes its elastic IP":"False, elastic IP stays but public IP will change"}, 
+    { "Quick Start Amazon Machine Image (AMI) can create any instance type":"Yup, any EC2 instance type"},
+    { "What S3 encryption doesn't require AWS storing the key to encrypt/decrypt data?":"SSE-C"}, 
+    { "Durability is the likelyhood an object will not be lost by AWS":"Yup, and persistance is time available"},
+    { "S3 uploads will be available after a short delay":"Naw shits like instant fam"}, 
+    { "You created a Virtual Private Cloud (VPC). Connecting this to your internal network produces an overlap in CIDR. What can you do?":"You can't change the CIDR for a VPC so you have to create a new one that doesn't conflict."},
+    { "EC2 instances must be in a public subnet to access the Internet":"False, private subnets can reach the Internet using NAT"}, 
+    { "The route table for a public subnet requires a default route pointing to an Internet gateway":"True, otherwise it's private"}, 
+    { "The Developer Support plan includes support API":"False"}, 
+    { "The Developer Support plan includes support API":"False"}, 
+    { "The Developer Support plan includes support API":"False"}, 
+    { "The Developer Support plan includes support API":"False"}, 
+    { "The Developer Support plan includes support API":"False"} 
+]}

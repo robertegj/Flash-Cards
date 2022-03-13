@@ -1,0 +1,6 @@
+{
+    "quizes": [
+        {"AWS-SAA-C02.json":"AWS Certified Solutions Architect"},
+        {"French-101.json":"Basics of the French Language"}
+    ]
+}
