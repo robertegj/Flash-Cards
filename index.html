@@ -61,6 +61,9 @@ h1 {
     background: red;
     color: white;
 }
+button {
+    font-size: larger;
+}
 </style>
 </head>
 <body>
@@ -167,14 +170,19 @@ function startCustomQuiz(){
     loadQuiz(currentQuiz);
 }
 
-function loadQuiz(availableQuizes) {
-    var availableQuizes = JSON.parse(availableQuizes);
-    console.log("Loading Quiz: " + availableQuizes["title"]);
+function loadQuiz(quizData) {
+    var quizData = JSON.parse(quizData);
+    console.log("Loading Quiz: " + quizData["title"]);
 
     var deck = document.getElementById("card-deck");
 
-    for (var x = 0; x < availableQuizes["questions"].length; x++){
-        var currentItem = availableQuizes["questions"][x];
+    var firstQuestion = Object.values(quizData["questions"][0]);
+    if(typeof(firstQuestion[0])=="object"){
+        alert("nut");
+    }
+
+    for (var x = 0; x < quizData["questions"].length; x++){
+        var currentItem = quizData["questions"][x];
         var quizCard = document.createElement("div");
         quizCard.className = "card";
 
@@ -194,9 +202,9 @@ function loadQuiz(availableQuizes) {
     }
     document.getElementById("editQuiz").style.display  = "none";
     document.getElementById("quiz").style.display  = "inline";
-    document.getElementById("title").innerText = availableQuizes["title"];
+    document.getElementById("title").innerText = quizData["title"];
 
-    console.log("Loaded Quiz: " + availableQuizes["title"]);
+    console.log("Loaded Quiz: " + quizData["title"]);
 }
 
 function getJSON(url) {

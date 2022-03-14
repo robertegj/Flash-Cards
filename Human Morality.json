@@ -1,0 +1,10 @@
+{
+    "title":"Human Morality",
+    "questions" : [
+    { "A dog is chasing a cat. What should you do?":[
+        "Stop the dog",
+        "Help the dog",
+        "Run Away",
+        "Shoot them both with an actual gun"
+    ]}
+]}
