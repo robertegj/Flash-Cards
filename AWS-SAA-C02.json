@@ -2,7 +2,7 @@
     "title":"AWS Certified Solutions Architect SAA-C02",
     "questions" : [
     { "The Developer Support plan includes support API":"False"}, 
-    { "AWS is responsible for your EC2 network confifuration":"AWS is only responsible for the physical layer."},
+    { "AWS is responsible for your EC2 network configuration":"AWS is only responsible for the physical layer."},
     { "What service is useful for decoupling a monolithic application?":"SQS Simple Queue Service"}, 
     { "An EC2 app requires CPU socket-based licensing. Which tenancy model should you use?":"Dedicated host"},
     { "Changing the insance type of an EC2 instance changes its elastic IP":"False, elastic IP stays but public IP will change"}, 

@@ -10,9 +10,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
 }
-#title {
-    text-align: center;
-}
 #quizInput {
     width: 100%;
     height: 50vh;
@@ -27,20 +24,34 @@ body {
     text-align: center;
     cursor: pointer;
 }
+.card {
+    font-size: 3em;
+    height: 50vh;
+}
+.card-font {
+    font-style: italic;
+}
+.card-back {
+    font-style: bold;
+}
 .hidden {
     display: none;
 }
 h1 {
     text-align: center;
 }
-#progress {
+#toolbelt {
     position: fixed;
     bottom: 0;
     left: 0;
+    width: 100%;
+    background:rgba(55,55,55, 0.3);
+}
+#progress {
     background: green;
     height: 2em;
-    border-right: 1px solid black;
-    border-top: 1px solid black;
+    border-right: 1px solid tan;
+    border-top: 1px solid yellow;
     width: 0em;
 }
 .lightgreen {
@@ -59,21 +70,22 @@ h1 {
     </div>
 
     <div id="editQuiz">
-        <h1>Edit/Custom Quiz</h1>
+        <h1>Custom Quiz</h1>
         <textarea id="quizInput" placeholder="Paste your quiz json here"></textarea>
         <br />
-        <button onclick="startQuiz()">Start Quiz</button>
+        <button onclick="startCustomQuiz()">Start Quiz</button>
     </div>
 
     <div id="quiz" style="display: none;">
-        <a onclick="changeView(this)" style="float:right;">Multi Card</a>
-        <a onclick="returnHome()">Available Quizes</a>
-        <h1 id="title">Flash Card 3000</h1>
         <div id="card-deck">
 
         </div>
-        <div id="progress">
-            
+
+        <div id="toolbelt">
+            <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
+            <button onclick="returnHome()" style="float:right;">Available Quizes</button>
+            <button onclick="changeView(this)" style="float:right;">Multi Card</button>
+            <div id="progress"></div>
         </div>
     </div>
 
@@ -84,16 +96,26 @@ h1 {
 function changeView(btn){
     var cards = document.getElementsByClassName("card");
     var card_width;
+    var card_height;
+    var card_font;
     if(btn.innerText=="Multi Card"){
         btn.innerText = "Single Card";
         card_width = "22vw";
+        card_height = "auto";
+        card_font = "1em";
     } else {
         btn.innerText = "Multi Card";
         card_width = "90vw";
+        card_height = "50vh";
+        card_font = "3em";
+        
     }
 
     for(var i=0;i<cards.length;i++){
         cards[i].style.width = card_width;
+        cards[i].style.height = card_height;
+        cards[i].style.fontSize = card_font;
+
     }
 }
 
@@ -120,8 +142,9 @@ function flipCard(event){
     progress_bar.style.width = progress_percent + "%";
 }
 
-function startQuiz(){
+function startCustomQuiz(){
     var currentQuiz = document.getElementById("quizInput").value;
+    document.getElementById("availableQuizes").style.display = "none";
     loadQuiz(currentQuiz);
 }
 
@@ -173,7 +196,8 @@ function getJSON(url) {
     }
 
 function quizClicked(){
-    loadQuiz(getJSON(this.innerText));
+
+    loadQuiz(getJSON(this.value));
     document.getElementById("availableQuizes").style.display = "none";
 }
 
@@ -186,15 +210,16 @@ function loadQuizes(){
         var quizCard = document.createElement("div");
         quizCard.className = "quizCard";
         console.log(currentItem);
-        quizCard.innerText = Object.keys(currentItem);
+        quizCard.innerText = Object.values(currentItem);
         quizCard.onclick = quizClicked;
+        quizCard.value = Object.keys(currentItem);
         document.getElementById("availableQuizes").appendChild(quizCard);
     }
 }
 
 function returnHome(){
     document.getElementById("quiz").style.display = "none";
-    document.getElementById("availableQuizes").style.display = "inline";
+    document.getElementById("availableQuizes").style.display = "flex";
 }
 
 loadQuizes();
