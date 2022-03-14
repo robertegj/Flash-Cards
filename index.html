@@ -9,6 +9,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 8em;
 }
 #quizInput {
     width: 100%;
@@ -24,9 +25,13 @@ body {
     text-align: center;
     cursor: pointer;
 }
+.quizCard:hover, .card:hover, button:hover{
+    filter: sepia(0.6);
+    box-shadow: 3px 4px 6px 1px rgba(55,55,55, 0.7);
+}
 .card {
     font-size: 3em;
-    height: 50vh;
+    min-height: 50vh;
 }
 .card-font {
     font-style: italic;
@@ -90,7 +95,7 @@ button {
         <div id="toolbelt">
             <div id="progress"></div>
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
-            <p style="display:inline;">Count: <p id="count" style="display:inline;">Flash Card 3000</p></p>
+            <p style="display:inline;">Count: <p id="completedCount" style="display:inline;"></p><p id="totalCount" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
                 <option value="volvo">Volvo</option>
                 <option value="saab">Saab</option>
@@ -98,7 +103,7 @@ button {
                 <option value="Audi">Audi</option>
               </select>
             <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
-            <button onclick="changeView(this)" style="float:right;height:2em;">Multi Card</button>
+            <button onclick="changeView(this)" id="changeViewButton" style="float:right;height:2em;">Multi Card</button>
             <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
 
         </div>
@@ -109,15 +114,16 @@ button {
 
 function toggleMarked(){
     var deck = document.getElementById("card-deck");
-    if(document.getElementById("markedButton").innerText=="Marked"){
-        document.getElementById("markedButton").innerText = "All";
+    var markedButton = document.getElementById("markedButton");
+    if(markedButton.innerText=="Marked"){
+        markedButton.innerText = "All";
         for(i=0;deck.children.length > i;i++){
             if(!deck.children[i].classList.contains("red")){
                 deck.children[i].classList.add("hidden");
             }
         }
     } else {
-        document.getElementById("markedButton").innerText = "Marked";
+        markedButton.innerText = "Marked";
         for(i=0;deck.children.length > i;i++){
             deck.children[i].classList.remove("hidden");
         }
@@ -134,7 +140,6 @@ function swapStyleSheet(sheet) {
 function changeTheme(){
     var theme = document.getElementById("theme").value;
     swapStyleSheet(theme);
-    console.log(theme);
 }
 // Multi Card or Single Card view change function
 function changeView(btn){
@@ -157,7 +162,7 @@ function changeView(btn){
 
     for(var i=0;i<cards.length;i++){
         cards[i].style.width = card_width;
-        cards[i].style.height = card_height;
+        cards[i].style.minHeight = card_height;
         cards[i].style.fontSize = card_font;
 
     }
@@ -182,8 +187,11 @@ function flipCard(event){
 
     var progress_percent = (amountDone / amountTodo) * 100;
 
-    var progress_bar = document.getElementById("progress");
-    progress_bar.style.width = progress_percent + "%";
+    var progressBar = document.getElementById("progress");
+    progressBar.style.width = progress_percent + "%";
+    var completed_cards = document.getElementsByClassName("lightgreen").length;
+    document.getElementById("completedCount").innerText = completed_cards + "/";
+
 }
 
 function startCustomQuiz(){
@@ -193,8 +201,15 @@ function startCustomQuiz(){
 }
 
 function loadQuiz(quizData) {
+    // reset progress & view
+    var progressBar = document.getElementById("progress");
+    progressBar.style.width = "0%";
+    var completed_cards = document.getElementsByClassName("lightgreen").length;
+    document.getElementById("completedCount").innerText = completed_cards + "/";
+    document.getElementById("changeViewButton").innerText = "Multi Card";
+
     var quizData = JSON.parse(quizData);
-    console.log("Loading Quiz: " + quizData["title"]);
+    //console.log("Loading Quiz: " + quizData["title"]);
 
     var deck = document.getElementById("card-deck");
 
@@ -241,10 +256,10 @@ function loadQuiz(quizData) {
     document.getElementById("editQuiz").style.display  = "none";
     document.getElementById("quiz").style.display  = "inline";
     document.getElementById("title").innerText = quizData["title"];
-    document.getElementById("count").innerText = quizData["questions"].length;
+    document.getElementById("totalCount").innerText = quizData["questions"].length;
 
 
-    console.log("Loaded Quiz: " + quizData["title"]);
+    //console.log("Loaded Quiz: " + quizData["title"]);
 }
 
 function getJSON(url) {
@@ -270,13 +285,13 @@ function quizClicked(){
 
 function loadQuizes(){
     var availableQuizes = JSON.parse(getJSON('./manifest.json'));
-    console.log(availableQuizes);
-    console.log(typeof(availableQuizes))
+    //console.log(availableQuizes);
+    //console.log(typeof(availableQuizes))
     for (var x = 0; x < availableQuizes["quizes"].length; x++){
         var currentItem = availableQuizes["quizes"][x];
         var quizCard = document.createElement("div");
         quizCard.className = "quizCard";
-        console.log(currentItem);
+        //console.log(currentItem);
         quizCard.innerText = Object.values(currentItem);
         quizCard.onclick = quizClicked;
         quizCard.value = Object.keys(currentItem);
