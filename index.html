@@ -47,6 +47,9 @@ h1 {
     width: 100%;
     background:rgba(55,55,55, 0.3);
 }
+#toolbelt  p{
+    margin: 0;
+}
 #progress {
     background: green;
     height: 2em;
@@ -87,7 +90,7 @@ button {
         <div id="toolbelt">
             <div id="progress"></div>
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
-            
+            <p style="display:inline;">Count: <p id="count" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
                 <option value="volvo">Volvo</option>
                 <option value="saab">Saab</option>
@@ -176,33 +179,52 @@ function loadQuiz(quizData) {
 
     var deck = document.getElementById("card-deck");
 
-    var firstQuestion = Object.values(quizData["questions"][0]);
-    if(typeof(firstQuestion[0])=="object"){
-        alert("nut");
-    }
 
     for (var x = 0; x < quizData["questions"].length; x++){
         var currentItem = quizData["questions"][x];
         var quizCard = document.createElement("div");
         quizCard.className = "card";
 
-        var cardFront = document.createElement("div");
-        cardFront.className = "card-front";
-        cardFront.innerText = Object.keys(currentItem);
+        console.log(typeof(Object.values(currentItem)[0]));
+        if(typeof(Object.values(currentItem)[0])=="object"){
+            console.log("YAY");
+            var answers = Object.values(currentItem)[0];
+            quizCard.innerText = Object.keys(currentItem)[0] + "\n\n";
+            for (var y = 0; y < answers.length; y++){
+            var answerRadio = document.createElement("input");
+            var answerLabel = document.createElement("label");
+            answerRadio.type = "radio";
+            answerRadio.name = x;
+            answerRadio.value = y;
+            answerLabel.htmlFor = y;
+            answerLabel.innerText = answers[y];
+            answerLabel.prepend(answerRadio);
+            quizCard.appendChild(answerLabel);
+            }
 
-        var cardBack = document.createElement("div");
-        cardBack.className = "card-back";
-        cardBack.classList.add("hidden");
-        cardBack.innerText = Object.values(currentItem);
+        } else {
+            console.log("AWW");
+            var cardFront = document.createElement("div");
+            cardFront.className = "card-front";
+            cardFront.innerText = Object.keys(currentItem);
 
-        quizCard.appendChild(cardFront);
-        quizCard.appendChild(cardBack);
-        quizCard.onclick = flipCard;
+            var cardBack = document.createElement("div");
+            cardBack.className = "card-back";
+            cardBack.classList.add("hidden");
+            cardBack.innerText = Object.values(currentItem);
+
+            quizCard.appendChild(cardFront);
+            quizCard.appendChild(cardBack);
+            quizCard.onclick = flipCard;
+        }
+
         document.getElementById("card-deck").appendChild(quizCard);
     }
     document.getElementById("editQuiz").style.display  = "none";
     document.getElementById("quiz").style.display  = "inline";
     document.getElementById("title").innerText = quizData["title"];
+    document.getElementById("count").innerText = quizData["questions"].length;
+
 
     console.log("Loaded Quiz: " + quizData["title"]);
 }
