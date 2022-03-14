@@ -25,6 +25,7 @@ body {
     padding: 1em;
     margin: 1em;
     text-align: center;
+    cursor: pointer;
 }
 .hidden {
     display: none;
@@ -44,6 +45,10 @@ h1 {
 }
 .lightgreen {
     background: lightgreen;
+}
+.red {
+    background: red;
+    color: white;
 }
 </style>
 </head>
@@ -92,12 +97,20 @@ function changeView(btn){
     }
 }
 
-function flipCard(){
-    for(i=0;i<this.children.length;i++){
+function flipCard(event){
+    if(event.shiftKey){
+        this.classList.toggle("red");
+        this.classList.remove("lightgreen");
+    } else {
+        if(!this.classList.contains("red")) {
+        this.classList.toggle("lightgreen");
+        }
+        for(i=0;i<this.children.length;i++){
         this.children[i].classList.toggle("hidden");
+        
     }
-    this.classList.toggle("lightgreen");
 
+    }
     var amountDone = document.getElementsByClassName("lightgreen").length;
     var amountTodo = document.getElementsByClassName("card").length;
 
@@ -105,7 +118,6 @@ function flipCard(){
 
     var progress_bar = document.getElementById("progress");
     progress_bar.style.width = progress_percent + "%";
-    console.log(progress_percent);
 }
 
 function startQuiz(){
