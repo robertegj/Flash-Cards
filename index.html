@@ -82,16 +82,35 @@ h1 {
         </div>
 
         <div id="toolbelt">
-            <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
-            <button onclick="returnHome()" style="float:right;">Available Quizes</button>
-            <button onclick="changeView(this)" style="float:right;">Multi Card</button>
             <div id="progress"></div>
+            <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
+            
+            <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="Audi">Audi</option>
+              </select>
+            <button onclick="returnHome()" style="float:right;">Back Home</button>
+            <button onclick="changeView(this)" style="float:right;">Multi Card</button>
         </div>
     </div>
 
 </body>
 <script>
-
+function swapStyleSheet(sheet) {
+    sheet = sheet + ".css";
+    var element = document.createElement("link");
+    element.setAttribute("rel", "stylesheet");
+    element.setAttribute("type", "text/css");
+    element.setAttribute("href", sheet);
+    document.getElementsByTagName("head")[0].appendChild(element);
+}
+function changeTheme(){
+    var theme = document.getElementById("theme").value;
+    swapStyleSheet(theme);
+    console.log(theme);
+}
 // Multi Card or Single Card view change function
 function changeView(btn){
     var cards = document.getElementsByClassName("card");
@@ -218,6 +237,7 @@ function loadQuizes(){
 }
 
 function returnHome(){
+    document.getElementById("card-deck").innerText ="";
     document.getElementById("quiz").style.display = "none";
     document.getElementById("availableQuizes").style.display = "flex";
 }
