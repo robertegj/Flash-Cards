@@ -32,6 +32,16 @@ body {
 h1 {
     text-align: center;
 }
+#progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: lightgreen;
+    height: 2em;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    width: 0em;
+}
 </style>
 </head>
 <body>
@@ -53,6 +63,9 @@ h1 {
         <h1 id="title">Flash Card 3000</h1>
         <div id="card-deck">
 
+        </div>
+        <div id="progress">
+            
         </div>
     </div>
 
@@ -80,6 +93,9 @@ function flipCard(){
     for(i=0;i<this.children.length;i++){
         this.children[i].classList.toggle("hidden");
     }
+    this.style.background = "lightgreen";
+    var progress_bar = document.getElementById("progress");
+    progress_bar.style.width = "10em";
 }
 
 function startQuiz(){
@@ -89,7 +105,6 @@ function startQuiz(){
 
 function loadQuiz(availableQuizes) {
     var availableQuizes = JSON.parse(availableQuizes);
-    console.log(availableQuizes);
     console.log("Loading Quiz: " + availableQuizes["title"]);
 
     var deck = document.getElementById("card-deck");
