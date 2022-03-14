@@ -3,9 +3,9 @@
 <head>
 <style>
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-#card-deck {
+#card-deck, #availableQuizes {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -17,7 +17,7 @@ body {
     width: 100%;
     height: 50vh;
 }
-.card {
+.quizCard, .card {
     border: 1px solid black;
     box-shadow: 3px 4px 4px 1px rgba(55,55,55, 0.5);
     border-radius: 6px;
@@ -36,11 +36,14 @@ h1 {
     position: fixed;
     bottom: 0;
     left: 0;
-    background: lightgreen;
+    background: green;
     height: 2em;
     border-right: 1px solid black;
     border-top: 1px solid black;
     width: 0em;
+}
+.lightgreen {
+    background: lightgreen;
 }
 </style>
 </head>
@@ -93,9 +96,16 @@ function flipCard(){
     for(i=0;i<this.children.length;i++){
         this.children[i].classList.toggle("hidden");
     }
-    this.style.background = "lightgreen";
+    this.classList.toggle("lightgreen");
+
+    var amountDone = document.getElementsByClassName("lightgreen").length;
+    var amountTodo = document.getElementsByClassName("card").length;
+
+    var progress_percent = (amountDone / amountTodo) * 100;
+
     var progress_bar = document.getElementById("progress");
-    progress_bar.style.width = "10em";
+    progress_bar.style.width = progress_percent + "%";
+    console.log(progress_percent);
 }
 
 function startQuiz(){
@@ -138,12 +148,10 @@ function loadQuiz(availableQuizes) {
 function getJSON(url) {
         var resp ;
         var xmlHttp ;
-
         resp  = '' ;
         xmlHttp = new XMLHttpRequest();
 
-        if(xmlHttp != null)
-        {
+        if(xmlHttp != null){
             xmlHttp.open( "GET", url, false );
             xmlHttp.send( null );
             resp = xmlHttp.responseText;
@@ -153,7 +161,6 @@ function getJSON(url) {
     }
 
 function quizClicked(){
-    console.log(this.innerText);
     loadQuiz(getJSON(this.innerText));
     document.getElementById("availableQuizes").style.display = "none";
 }
@@ -165,7 +172,7 @@ function loadQuizes(){
     for (var x = 0; x < availableQuizes["quizes"].length; x++){
         var currentItem = availableQuizes["quizes"][x];
         var quizCard = document.createElement("div");
-        quizCard.className = "card";
+        quizCard.className = "quizCard";
         console.log(currentItem);
         quizCard.innerText = Object.keys(currentItem);
         quizCard.onclick = quizClicked;
@@ -175,7 +182,6 @@ function loadQuizes(){
 
 function returnHome(){
     document.getElementById("quiz").style.display = "none";
-
     document.getElementById("availableQuizes").style.display = "inline";
 }
 
