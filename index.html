@@ -97,13 +97,32 @@ button {
                 <option value="fiat">Fiat</option>
                 <option value="Audi">Audi</option>
               </select>
-            <button onclick="returnHome()" style="float:right;">Back Home</button>
-            <button onclick="changeView(this)" style="float:right;">Multi Card</button>
+            <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
+            <button onclick="changeView(this)" style="float:right;height:2em;">Multi Card</button>
+            <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
+
         </div>
     </div>
 
 </body>
 <script>
+
+function toggleMarked(){
+    var deck = document.getElementById("card-deck");
+    if(document.getElementById("markedButton").innerText=="Marked"){
+        document.getElementById("markedButton").innerText = "All";
+        for(i=0;deck.children.length > i;i++){
+            if(!deck.children[i].classList.contains("red")){
+                deck.children[i].classList.add("hidden");
+            }
+        }
+    } else {
+        document.getElementById("markedButton").innerText = "Marked";
+        for(i=0;deck.children.length > i;i++){
+            deck.children[i].classList.remove("hidden");
+        }
+    }
+}    
 function swapStyleSheet(sheet) {
     sheet = sheet + ".css";
     var element = document.createElement("link");
@@ -185,25 +204,24 @@ function loadQuiz(quizData) {
         var quizCard = document.createElement("div");
         quizCard.className = "card";
 
-        console.log(typeof(Object.values(currentItem)[0]));
+        // Check if there are multiple answers (ie multiple chocie)
         if(typeof(Object.values(currentItem)[0])=="object"){
-            console.log("YAY");
             var answers = Object.values(currentItem)[0];
             quizCard.innerText = Object.keys(currentItem)[0] + "\n\n";
             for (var y = 0; y < answers.length; y++){
-            var answerRadio = document.createElement("input");
-            var answerLabel = document.createElement("label");
-            answerRadio.type = "radio";
-            answerRadio.name = x;
-            answerRadio.value = y;
-            answerLabel.htmlFor = y;
-            answerLabel.innerText = answers[y];
-            answerLabel.prepend(answerRadio);
-            quizCard.appendChild(answerLabel);
+                var answerRadio = document.createElement("input");
+                var answerLabel = document.createElement("label");
+                answerRadio.type = "radio";
+                answerRadio.name = x;
+                answerRadio.value = y;
+                answerLabel.htmlFor = y;
+                answerLabel.innerText = answers[y] + "\n";
+                answerLabel.prepend(answerRadio);
+                quizCard.appendChild(answerLabel);
             }
 
         } else {
-            console.log("AWW");
+            // Assume flash card QA format
             var cardFront = document.createElement("div");
             cardFront.className = "card-front";
             cardFront.innerText = Object.keys(currentItem);
