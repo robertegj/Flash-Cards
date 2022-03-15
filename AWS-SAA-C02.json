@@ -1,48 +1,106 @@
 {
     "title":"AWS Certified Solutions Architect SAA-C02",
     "questions" : [
-    { "The Developer Support plan includes support API":"False"}, 
-    { "AWS is responsible for your EC2 network configuration":"AWS is only responsible for the physical layer."},
-    { "What service is useful for decoupling a monolithic application?":"SQS Simple Queue Service"}, 
-    { "An EC2 app requires CPU socket-based licensing. Which tenancy model should you use?":"Dedicated host"},
-    { "Changing the insance type of an EC2 instance changes its elastic IP":"False, elastic IP stays but public IP will change"}, 
-    { "Quick Start Amazon Machine Image (AMI) can create any instance type":"Yup, any EC2 instance type"},
-    { "What S3 encryption doesn't require AWS storing the key to encrypt/decrypt data?":"SSE-C"}, 
-    { "Durability is the likelyhood an object will not be lost by AWS":"Yup, and persistance is time available"},
-    { "S3 uploads will be available after a short delay":"Naw shits like instant fam"}, 
-    { "You created a Virtual Private Cloud (VPC). Connecting this to your internal network produces an overlap in CIDR. What can you do?":"You can't change the CIDR for a VPC so you have to create a new one that doesn't conflict."},
-    { "EC2 instances must be in a public subnet to access the Internet":"False, private subnets can reach the Internet using NAT"}, 
-    { "The route table for a public subnet requires a default route pointing to an Internet gateway":"True, otherwise it's private"}, 
-    { "What is a good use case for DynamoDB?":"Keystore - DynamoDB as a 400KB limit"}, 
-    { "You can create a DynamoDB global secondary index for an existing table anytime":"Yup, globals can me changed any time. Local tables are changed only at creation."}, 
-    { "Enabling point-in-time RDS snapshotting gives you a recovery point objective of 10 minutes":"Point-in-time RDS snapshotting occurrs every 5 minutes."}, 
-    { "EC2 reports memory metrics to CloudWatch every 5 minutes":"EC2 doesn't report memory use"}, 
-    { "What does the most to protect your AWS account?":"Managing IAM properly - Revoke unneccessary access"}, 
-    { "What AWS service can encrypt EC2's OS?":"KMS can encrypt the EBS that EC2 is stored on"}, 
-    { "What's the difference between AWS Security Token Service and IAM access key?":"STS tokens expire, can be used more than once"}, 
-    { "CloudWatch monitoring CPU reports INSUFFICIENT_DATA and then ALARM. What happened?":"Crossed alarm threshhold"}, 
-    { "Where do AWS Config and CloudTrail store logs":"S3 buckets"}, 
-    { "EC2 in private subnet can resolve 'A' records in Route 53":"True, using AWS private DNS"}, 
-    { "What Route53 routing policy would you use to route traffic to the closest loadbalancer?":"GeoProximity"}, 
-    { "You can use an existing domain in Route53 without changing its registration":"True, Route53 is a 'True DNS'"}, 
-    { "What service might be useful for building a scalable, HA app that converts images to video?":"Lambda"}, 
-    { "What EC2 auto-scaling policy could be used to add a new instance when CPU reaches a certain threshhold but only every X minutes?":"A Simple Scaling Policy"}, 
-    { "EC2 auto-scaling automatically replaces group instances terminated by user":"Yes, apparently."}, 
-    { "Which ElasticCache engine can persistantly store data?":"EC supports Redis and Memecached but only Redis is persistant"}, 
-    { "Which is NOT an AWS service?":"Puppet"}, 
-    { "S3 cross-replication uses transfer acceleration":"No, transfer acceleration is only for things leaving AWS"}, 
-    { "What can you security measure can you deactivate on your account?":"STS except in US-EAST"}, 
-    { "What alerts you to malware?":"GuardDuty"}, 
-    { "Versioning creates new instance for encrypt/decrypt changes":"Yup, and the old unencrypted versions will be kept."}, 
-    { "Which instance type will continue to cost if left on/unused?":"On demand costs $ when used. Reserved costs the same regardless of usage. Spot price is limited by price in advance. "}, 
-    { "EBS lifecycle manager can snapshot volumes attached to terminated instances":"True - Any EBS volume can be snapshotted"}, 
-    { "What AWS service is fastest to spin up a web server?":"EC2 - Lambda and lightsail can do web stuff but are not web servers"}, 
-    { "CloudFormation names are case-sensitive":"Everything in CloudFormation is case-sensitive"}, 
-    { "CodeDeploy can get appspec.yml from...":"S3 or GitHub"}, 
-    { "CodeDeploy and AWS Systems Manager can deploy to Lambda":"False, only CodeDeploy can deploy to Lambda - AWS SysMan is for EC2 only"}, 
-    { "The Developer Support plan includes support API":"False"},
-    {"":""},
-    {"":""},
-    {"":""},
-    {"":""}
+    { "The Developer Support plan includes support API":
+        "False"}, 
+    { "AWS is responsible for your EC2 network configuration":
+        "AWS is only responsible for the physical layer."},
+    { "What service is useful for decoupling a monolithic application?":
+        "SQS Simple Queue Service"}, 
+    { "An EC2 app requires CPU socket-based licensing. Which tenancy model should you use?":
+        "Dedicated host"},
+    { "Changing the insance type of an EC2 instance changes its elastic IP":
+        "False, elastic IP stays but public IP will change"}, 
+    { "Quick Start Amazon Machine Image (AMI) can create any instance type":
+        "Yup, any EC2 instance type"},
+    { "What S3 encryption doesn't require AWS storing the key to encrypt/decrypt data?":
+        "SSE-C"}, 
+    { "Durability is the likelyhood an object will not be lost by AWS":
+        "Yup, and persistance is time available"},
+    { "S3 uploads will be available after a short delay":
+        "Naw shits like instant fam"}, 
+    { "You created a Virtual Private Cloud (VPC). Connecting this to your internal network produces an overlap in CIDR. What can you do?":
+        "You can't change the CIDR for a VPC so you have to create a new one that doesn't conflict."},
+    { "EC2 instances must be in a public subnet to access the Internet":
+        "False, private subnets can reach the Internet using NAT"}, 
+    { "The route table for a public subnet requires a default route pointing to an Internet gateway":
+        "True, otherwise it's private"}, 
+    { "What is a good use case for DynamoDB?":
+        "Keystore - DynamoDB as a 400KB limit"}, 
+    { "You can create a DynamoDB global secondary index for an existing table anytime":
+        "Yup, globals can me changed any time. Local tables are changed only at creation."}, 
+    { "Enabling point-in-time RDS snapshotting gives you a recovery point objective of 10 minutes":
+        "Point-in-time RDS snapshotting occurrs every 5 minutes."}, 
+    { "EC2 reports memory metrics to CloudWatch every 5 minutes":
+        "EC2 doesn't report memory use"}, 
+    { "What does the most to protect your AWS account?":
+        "Managing IAM properly - Revoke unneccessary access"}, 
+    { "What AWS service can encrypt EC2's OS?":
+        "KMS can encrypt the EBS that EC2 is stored on"}, 
+    { "What's the difference between AWS Security Token Service and IAM access key?":
+        "STS tokens expire, can be used more than once"}, 
+    { "CloudWatch monitoring CPU reports INSUFFICIENT_DATA and then ALARM. What happened?":
+        "Crossed alarm threshhold"}, 
+    { "Where do AWS Config and CloudTrail store logs":
+        "S3 buckets"}, 
+    { "EC2 in private subnet can resolve 'A' records in Route 53":
+        "True, using AWS private DNS"}, 
+    { "What Route53 routing policy would you use to route traffic to the closest loadbalancer?":
+        "GeoProximity"}, 
+    { "You can use an existing domain in Route53 without changing its registration":
+        "True, Route53 is a 'True DNS'"}, 
+    { "What service might be useful for building a scalable, HA app that converts images to video?":
+        "Lambda"}, 
+    { "What EC2 auto-scaling policy could be used to add a new instance when CPU reaches a certain threshhold but only every X minutes?":
+        "A Simple Scaling Policy"}, 
+    { "EC2 auto-scaling automatically replaces group instances terminated by user":
+        "Yes, apparently."}, 
+    { "Which ElasticCache engine can persistantly store data?":
+        "EC supports Redis and Memecached but only Redis is persistant"}, 
+    { "Between CloudFormation, Puppet, OpsWorks, and Snowball, which is NOT an AWS service?":
+        "Puppet"}, 
+    { "S3 cross-replication uses transfer acceleration":
+        "No, transfer acceleration is only for things leaving AWS"}, 
+    { "What can you security measure can you deactivate on your account?":
+        "STS except in US-EAST"}, 
+    { "What alerts you to malware?":
+        "GuardDuty"}, 
+    { "Versioning creates new instance for encrypt/decrypt changes":
+        "Yup, and the old unencrypted versions will be kept."}, 
+    { "Which instance type will continue to cost if left on/unused?":
+        "On demand costs $ when used. Reserved costs the same regardless of usage. Spot price is limited by price in advance. "}, 
+    { "EBS lifecycle manager can snapshot volumes attached to terminated instances":
+        "True - Any EBS volume can be snapshotted"}, 
+    { "What AWS service is fastest to spin up a web server?":
+        "EC2 - Lambda and lightsail can do web stuff but are not web servers"}, 
+    { "CloudFormation names are case-sensitive":
+        "Everything in CloudFormation is case-sensitive"}, 
+    { "CodeDeploy can get appspec.yml from...":
+        "S3 or GitHub"}, 
+    { "CodeDeploy and AWS Systems Manager can deploy to Lambda":
+        "False, only CodeDeploy can deploy to Lambda - AWS SysMan is for EC2 only"}, 
+    { "The Developer Support plan includes support API":
+        "False"},
+    {"How might you allow devs to provision EC2 instances without manually configuring and launching the necessary infrastructure each time?":
+        "Elastic Beanstalk takes care of deployments. Lambda can respond to events by running code once. Auto scaling responds to demand."},
+    {"Some users in remote geographic locations are experiencing access delays. What service might help?":
+        "CloudFront maintains a network of endpoints with caches for your applications."},
+    {"What's a good use case for Elastic Block Store?":
+        "Elastic Block Store provides virtual storage drives for filesystems and data ops. Not great price-wise for long-term storage."},
+    {"What AWS services help integrate local user access controls to AWS resources? Pick two.":
+        "AWS IAM lets you make user accoutns groups and roles, permissions for AWS resources and Directory Service allows you to integrate your resources with external users and resources through third party applications."},
+    {"What AWS solution provides more speed and flexibility that a closely defined relational database?":
+        "DynamoDB provides a NoSQL (nonrelational) database service. Both are good for workloads that can be more efficiently run without the relational schema of SQL database engines (like those, including Aurora, that are offered by RDS). KMS is a tool for generating and managing encryption keys."},
+    {"What is the endpoint address for EC2 in Ireland?":
+        "EC2 endpoints will always start with an ec2 prefix followed by the region designation (eu-west-1 in the case of Ireland)."},
+    {"What is an availability zone?":
+        "An availability zone is an isolated physical data center within an AWS region. Regions contain multiple AZs."},
+    {"How can you organize instances, configure their network activity, and access control from a single tool?":
+        "VPCs are virtualized network environments where you can control the connectivity of your EC2 (and RDS, etc.) infrastructure."},
+    {"How can you ensure your EC2 and S3 resources will meet regulatory standards?":
+        "There is no AWS Program Compliance tool. The AWS service level agreement tells you the level of service availability you can realistically expect from a particular AWS service. You can use this information when assessing your compliance with external standards. Log records, though they can offer important historical performance metrics, probably won’t be enough to prove compliance. The AWS Compliance Programs page will show you only which regulatory programs can be satisfied with AWS resources, not whether a particular configuration will meet their demands. "},
+    {"What tool lets you access AWS infra from CLI/shell scripts?":
+        "The AWS Command Line Interface (CLI) is a tool for accessing AWS APIs from the command-line shell of your local computer. The AWS SDK is for accessing resources programmatically."},
+    {"What plan should you purchase for help with AWS support for both dev and IT team leaders? (multiple teams)":
+        "Unlike the Basic and Developer plans (which allow access to a support associate to no or one user, respectively), the Business plan allows multiple team members."}
 ]}

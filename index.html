@@ -139,6 +139,7 @@ function swapStyleSheet(sheet) {
 }
 function changeTheme(){
     var theme = document.getElementById("theme").value;
+    localStorage["theme"] = theme;
     swapStyleSheet(theme);
 }
 // Multi Card or Single Card view change function
@@ -169,19 +170,37 @@ function changeView(btn){
 }
 
 function flipCard(event){
+    // Mark it red or green? If shift is held...
     if(event.shiftKey){
         this.classList.toggle("red");
         this.classList.remove("lightgreen");
     } else {
         if(!this.classList.contains("red")) {
-        this.classList.toggle("lightgreen");
+            this.classList.toggle("lightgreen");
         }
         for(i=0;i<this.children.length;i++){
-        this.children[i].classList.toggle("hidden");
-        
+            this.children[i].classList.toggle("hidden");
+        }
     }
 
-    }
+    // Update the progress
+    var savedProgress = JSON.parse(localStorage["progress"]);
+    //if(localStorage["progress"]==undefined){
+        var savedProgress = new Object();
+        savedProgress.quizes = {};
+        localStorage["progress"] = JSON.stringify(savedProgress);
+    //}
+    // check if this test has any progress...
+    var quizTitle = document.getElementById("title").innerText;
+
+
+    //savedProgress["quizes"].push(quizTitle);
+    //localStorage["progress"] = JSON.stringify(savedProgress);
+    console.log(savedProgress["quizes"]);
+
+
+
+
     var amountDone = document.getElementsByClassName("lightgreen").length;
     var amountTodo = document.getElementsByClassName("card").length;
 
@@ -306,6 +325,11 @@ function returnHome(){
 }
 
 loadQuizes();
+
+if(localStorage["theme"] != undefined){
+    swapStyleSheet(localStorage["theme"]);
+    theme.value = localStorage["theme"];
+}
 
 </script>
 </html>
