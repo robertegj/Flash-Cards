@@ -192,7 +192,9 @@ function flipCard(event){
     if(event.shiftKey){
         this.classList.toggle("red");
         this.classList.remove("lightgreen");
+        category = "problems";
     } else {
+        category = "progress";
         if(!this.classList.contains("red")) {
             this.classList.toggle("lightgreen");
         }
@@ -202,13 +204,13 @@ function flipCard(event){
     }
 
     // Update the progress
-    if (typeof localStorage["progress"] == 'undefined') {
+    if (typeof localStorage[category] == 'undefined') {
         var savedProgress = new Object();
         savedProgress.quizes = {};
-        localStorage["progress"] = JSON.stringify(savedProgress);
+        localStorage[category] = JSON.stringify(savedProgress);
     }
     // check if this test has any progress...
-    var savedProgress = JSON.parse(localStorage["progress"]);
+    var savedProgress = JSON.parse(localStorage[category]);
     var quizTitle = document.getElementById("title").innerText;
 
     // toggle that card
@@ -217,7 +219,7 @@ function flipCard(event){
     }
     addOrRemove(savedProgress["quizes"][quizTitle], this.value);
 
-    localStorage["progress"] = JSON.stringify(savedProgress);
+    localStorage[category] = JSON.stringify(savedProgress);
 
     console.log(savedProgress["quizes"][quizTitle]);
 
@@ -324,6 +326,22 @@ function loadQuiz(quizData) {
         }
     }
 
+    // load marked if there are any
+    if (typeof localStorage["problems"] !== 'undefined') {
+        currentProblems = JSON.parse(localStorage["problems"]);
+        // for this test
+        if(quizData["title"] in currentProblems["quizes"]){
+            console.log("theres prolem");
+            var currentQuizTitle = quizData["title"];
+            var markedCards = currentProblems["quizes"][currentQuizTitle];
+            // mark light green all cards that appear in that list of completed cards
+            var allCards = document.getElementsByClassName("card");
+            for(i=0;i<markedCards.length;i++){
+                allCards[markedCards[i]].classList.add("red");
+            }
+        }
+    }
+
     // load updated progress bar 
     var amountDone = document.getElementsByClassName("lightgreen").length;
     var amountTodo = document.getElementsByClassName("card").length;
@@ -336,12 +354,9 @@ function loadQuiz(quizData) {
     document.getElementById("completedCount").innerText = completed_cards + "/";
 
     // load last view
-    if(localStorage["view"] != undefined){
-    console.log("AWW");
-    console.log(localStorage["view"]);
-    
-    document.getElementById("changeViewButton").innerText = localStorage["view"];
-    changeView(document.getElementById("changeViewButton"));
+    if(localStorage["view"] != undefined){   
+        document.getElementById("changeViewButton").innerText = localStorage["view"];
+        changeView(document.getElementById("changeViewButton"));
     }
 
 }
