@@ -9,7 +9,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 8em;
+}
+#card-deck {
+    margin-top: 3em;
 }
 #quizInput {
     width: 100%;
@@ -47,7 +49,7 @@ h1 {
 }
 #toolbelt {
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     background:rgba(55,55,55, 0.3);
@@ -61,6 +63,9 @@ h1 {
     border-right: 1px solid tan;
     border-top: 1px solid yellow;
     width: 0em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 .lightgreen {
     background: lightgreen;
@@ -93,7 +98,11 @@ button {
         </div>
 
         <div id="toolbelt">
-            <div id="progress"></div>
+            <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
+            <button onclick="changeView(this)" id="changeViewButton" style="float:right;height:2em;">Multi Card</button>
+            <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
+            <button onclick="localStorage.clear();document.location.reload();" id="resetButton" style="float:right;height:2em;">Reset</button>
+
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">Count: <p id="completedCount" style="display:inline;"></p><p id="totalCount" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
@@ -102,11 +111,10 @@ button {
                 <option value="fiat">Fiat</option>
                 <option value="Audi">Audi</option>
               </select>
-            <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
-            <button onclick="changeView(this)" id="changeViewButton" style="float:right;height:2em;">Multi Card</button>
-            <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
-
         </div>
+
+        <div id="progress"></div>
+
     </div>
 
 </body>
@@ -157,11 +165,13 @@ function changeView(btn){
     var card_height;
     var card_font;
     if(btn.innerText=="Multi Card"){
+        localStorage["view"] = "Multi Card";
         btn.innerText = "Single Card";
         card_width = "22vw";
         card_height = "auto";
         card_font = "1em";
     } else {
+        localStorage["view"] = "Single Card";
         btn.innerText = "Multi Card";
         card_width = "90vw";
         card_height = "50vh";
@@ -203,7 +213,7 @@ function flipCard(event){
 
     // toggle that card
     if(savedProgress["quizes"][quizTitle]==undefined){
-        savedProgress["quizes"][quizTitle] = []
+        savedProgress["quizes"][quizTitle] = [];
     }
     addOrRemove(savedProgress["quizes"][quizTitle], this.value);
 
@@ -213,7 +223,7 @@ function flipCard(event){
 
 
 
-
+    // update progress bar logic
     var amountDone = document.getElementsByClassName("lightgreen").length;
     var amountTodo = document.getElementsByClassName("card").length;
 
@@ -307,9 +317,33 @@ function loadQuiz(quizData) {
             var allCards = document.getElementsByClassName("card");
             for(i=0;i<completedCards.length;i++){
                 allCards[completedCards[i]].classList.add("lightgreen");
+                // flip the card
+                allCards[completedCards[i]].children[0].classList.toggle("hidden");
+                allCards[completedCards[i]].children[1].classList.toggle("hidden");
             }
         }
     }
+
+    // load updated progress bar 
+    var amountDone = document.getElementsByClassName("lightgreen").length;
+    var amountTodo = document.getElementsByClassName("card").length;
+
+    var progress_percent = (amountDone / amountTodo) * 100;
+
+    var progressBar = document.getElementById("progress");
+    progressBar.style.width = progress_percent + "%";
+    var completed_cards = document.getElementsByClassName("lightgreen").length;
+    document.getElementById("completedCount").innerText = completed_cards + "/";
+
+    // load last view
+    if(localStorage["view"] != undefined){
+    console.log("AWW");
+    console.log(localStorage["view"]);
+    
+    document.getElementById("changeViewButton").innerText = localStorage["view"];
+    changeView(document.getElementById("changeViewButton"));
+    }
+
 }
 
 function getJSON(url) {
