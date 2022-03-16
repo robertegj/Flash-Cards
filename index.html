@@ -101,7 +101,7 @@ button {
             <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
             <button onclick="changeView(this)" id="changeViewButton" style="float:right;height:2em;">Multi Card</button>
             <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
-            <button onclick="localStorage.clear();document.location.reload();" id="resetButton" style="float:right;height:2em;">Reset</button>
+            <button onclick="delete(localStorage.progress);delete(localStorage.problems);document.location.reload();" id="resetButton" style="float:right;height:2em;">Reset</button>
 
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">Count: <p id="completedCount" style="display:inline;"></p><p id="totalCount" style="display:inline;">Flash Card 3000</p></p>
@@ -132,13 +132,24 @@ function toggleMarked(){
     var deck = document.getElementById("card-deck");
     var markedButton = document.getElementById("markedButton");
     if(markedButton.innerText=="Marked"){
-        markedButton.innerText = "All";
+        markedButton.innerText = "Unfinished";
         for(i=0;deck.children.length > i;i++){
             if(!deck.children[i].classList.contains("red")){
                 deck.children[i].classList.add("hidden");
             }
         }
-    } else {
+    } else if(markedButton.innerText=="Unfinished") {
+        markedButton.innerText = "All";
+        // unhide all
+        for(i=0;deck.children.length > i;i++){
+            deck.children[i].classList.remove("hidden");
+        }
+        // hide all greens
+        finishedDeck = document.getElementsByClassName("lightgreen");
+        for(i=0;finishedDeck.length > i;i++){
+            finishedDeck[i].classList.add("hidden");
+        }
+     } else {
         markedButton.innerText = "Marked";
         for(i=0;deck.children.length > i;i++){
             deck.children[i].classList.remove("hidden");
@@ -220,8 +231,6 @@ function flipCard(event){
     addOrRemove(savedProgress["quizes"][quizTitle], this.value);
 
     localStorage[category] = JSON.stringify(savedProgress);
-
-    console.log(savedProgress["quizes"][quizTitle]);
 
 
 
@@ -311,10 +320,8 @@ function loadQuiz(quizData) {
         currentProgress = JSON.parse(localStorage["progress"]);
         // for this test
         if(quizData["title"] in currentProgress["quizes"]){
-            console.log("theres progress");
             var currentQuizTitle = quizData["title"];
             var completedCards = currentProgress["quizes"][currentQuizTitle];
-            console.log(completedCards);
             // mark light green all cards that appear in that list of completed cards
             var allCards = document.getElementsByClassName("card");
             for(i=0;i<completedCards.length;i++){
@@ -331,7 +338,6 @@ function loadQuiz(quizData) {
         currentProblems = JSON.parse(localStorage["problems"]);
         // for this test
         if(quizData["title"] in currentProblems["quizes"]){
-            console.log("theres prolem");
             var currentQuizTitle = quizData["title"];
             var markedCards = currentProblems["quizes"][currentQuizTitle];
             // mark light green all cards that appear in that list of completed cards
