@@ -111,7 +111,15 @@ button {
 
 </body>
 <script>
+function addOrRemove(array, value) {
+    var index = array.indexOf(value);
 
+    if (index === -1) {
+        array.push(value);
+    } else {
+        array.splice(index, 1);
+    }
+}
 function toggleMarked(){
     var deck = document.getElementById("card-deck");
     var markedButton = document.getElementById("markedButton");
@@ -184,19 +192,24 @@ function flipCard(event){
     }
 
     // Update the progress
-    var savedProgress = JSON.parse(localStorage["progress"]);
-    //if(localStorage["progress"]==undefined){
+    if (typeof localStorage["progress"] == 'undefined') {
         var savedProgress = new Object();
         savedProgress.quizes = {};
         localStorage["progress"] = JSON.stringify(savedProgress);
-    //}
+    }
     // check if this test has any progress...
+    var savedProgress = JSON.parse(localStorage["progress"]);
     var quizTitle = document.getElementById("title").innerText;
 
+    // toggle that card
+    if(savedProgress["quizes"][quizTitle]==undefined){
+        savedProgress["quizes"][quizTitle] = []
+    }
+    addOrRemove(savedProgress["quizes"][quizTitle], this.value);
 
-    //savedProgress["quizes"].push(quizTitle);
-    //localStorage["progress"] = JSON.stringify(savedProgress);
-    console.log(savedProgress["quizes"]);
+    localStorage["progress"] = JSON.stringify(savedProgress);
+
+    console.log(savedProgress["quizes"][quizTitle]);
 
 
 
@@ -237,6 +250,7 @@ function loadQuiz(quizData) {
         var currentItem = quizData["questions"][x];
         var quizCard = document.createElement("div");
         quizCard.className = "card";
+        quizCard.value = x;
 
         // Check if there are multiple answers (ie multiple chocie)
         if(typeof(Object.values(currentItem)[0])=="object"){
@@ -272,13 +286,30 @@ function loadQuiz(quizData) {
 
         document.getElementById("card-deck").appendChild(quizCard);
     }
+
     document.getElementById("editQuiz").style.display  = "none";
     document.getElementById("quiz").style.display  = "inline";
     document.getElementById("title").innerText = quizData["title"];
     document.getElementById("totalCount").innerText = quizData["questions"].length;
 
-
     //console.log("Loaded Quiz: " + quizData["title"]);
+
+    // load progress if there is any
+    if (typeof localStorage["progress"] !== 'undefined') {
+        currentProgress = JSON.parse(localStorage["progress"]);
+        // for this test
+        if(quizData["title"] in currentProgress["quizes"]){
+            console.log("theres progress");
+            var currentQuizTitle = quizData["title"];
+            var completedCards = currentProgress["quizes"][currentQuizTitle];
+            console.log(completedCards);
+            // mark light green all cards that appear in that list of completed cards
+            var allCards = document.getElementsByClassName("card");
+            for(i=0;i<completedCards.length;i++){
+                allCards[completedCards[i]].classList.add("lightgreen");
+            }
+        }
+    }
 }
 
 function getJSON(url) {
