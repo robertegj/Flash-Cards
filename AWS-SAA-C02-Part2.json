@@ -1,0 +1,50 @@
+{
+    "title":"AWS Certified Solutions Architect SAA-C02",
+    "questions" : [
+    {"You need to deploy multiple EC2 instances with OpenVPN installed. What are 2 services that can help?":
+        ""},
+    {"You want to migrate VMWare VMs to EC2; What are two necessary steps?":
+        ""},
+    {"AWS CLI to launch EC2 fails with the error InvalidAMIID.NotFound - What probably happened?":
+        ""},
+    {"What tenancy provides complete physical isolation?":
+        ""},
+    {"Normally your instances can handle traffic but you're expecting a spike; What 2 things could you do?":
+        ""},
+    {"What's a cost effective use case for spot market instances?":
+        ""},
+    {"What CANNOT be changed about an EC2 instance?":
+        ""},
+    {"What's the most effective key/value combo convention for resource tags?":
+        ""},
+    {"What EBS option would be best for an applicaiton requiring 20k+ IOPS?":
+        ""},
+    {"Your org needs to produce a new 'Golden Image' AMI with auto-scaling from an existing volume. What 3 steps are necessary?":
+        ""},
+    {"What are 2 benefits of instance store volumes?":
+        ""},
+    {"Using AWS recommendations, suggest 2 private IP's to be used for an EC2 instance":
+        ""},
+    {"What 3 data attributes can be considered to restrict EC2 access ":
+        ""},
+    {"In what 2 ways are IAM roles used to secure resoruce access for EC2 instances?":
+        ""},
+    {"In what 2 ways can you allow external network access from a private subnet through a public VPC?":
+        ""},
+    {"How do you securely authenticate to the GUI console of a Windows EC2 session?":
+        ""},
+    {"Your app deployment includes multiple EC2 instances that require low latency. What AWS tool hep locate EC2 instances closest to eachother?":
+        ""},
+    {"To save config time and money you want your app to run only when called, scaling down after. What will do that for you?":
+        ""},
+    {"What helps you quickly copy a VM from your infra into your AWS VPC?":
+        ""},  
+    {"You have an EC2 auto-scaling group to install an app on several instances. Now you want it to install additional apps. What should you do?":
+        ""}, 
+    {"An auto-scaling policy has a minimum of 3, a max of 10 and a desired of 7. You delete 3 of the 7. What will auto-scaling attempt to do?":
+        ""}, 
+    {"You have a CPU spike at a certain time of week. You set up auto scaling to accommodate for this. What should you implement? (Choose X)":
+        ""}, 
+    {"What Systems Manager document enables you to manually take EBS snapshots of several hundred volumes?":
+        ""} 
+]}
