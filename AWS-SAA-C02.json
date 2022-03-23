@@ -2,7 +2,7 @@
     "title":"AWS Certified Solutions Architect SAA-C02",
     "questions" : [
     { "The Developer Support plan includes support API":
-        "False"}, 
+        "False, Business Support includes support access but the Developer support plan does not."}, 
     { "AWS is responsible for your EC2 network configuration":
         "AWS is only responsible for the physical layer."},
     { "What service is useful for decoupling a monolithic application?":
@@ -33,7 +33,7 @@
         "Point-in-time RDS snapshotting occurrs every 5 minutes."}, 
     { "EC2 reports memory metrics to CloudWatch every 5 minutes":
         "EC2 doesn't report memory use"}, 
-    { "What does the most to protect your AWS account?":
+    { "What is the most important way to protect your AWS account?":
         "Managing IAM properly - Revoke unneccessary access"}, 
     { "What AWS service can encrypt EC2's OS?":
         "KMS can encrypt the EBS that EC2 is stored on"}, 
@@ -50,7 +50,7 @@
     { "You can use an existing domain in Route53 without changing its registration":
         "True, Route53 is a 'True DNS'"}, 
     { "What service might be useful for building a scalable, HA app that converts images to video?":
-        "Lambda"}, 
+        "Lambda is scalable and highly available"}, 
     { "What EC2 auto-scaling policy could be used to add a new instance when CPU reaches a certain threshhold but only every X minutes?":
         "A Simple Scaling Policy"}, 
     { "EC2 auto-scaling automatically replaces group instances terminated by user":
@@ -61,7 +61,7 @@
         "Puppet"}, 
     { "S3 cross-replication uses transfer acceleration":
         "No, transfer acceleration is only for things leaving AWS"}, 
-    { "What can you security measure can you deactivate on your account?":
+    { "What security measure can you deactivate on your account?":
         "STS except in US-EAST"}, 
     { "What alerts you to malware?":
         "GuardDuty"}, 

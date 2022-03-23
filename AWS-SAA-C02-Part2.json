@@ -1,34 +1,34 @@
 {
     "title":"AWS Certified Solutions Architect SAA-C02",
     "questions" : [
-    {"You need to deploy multiple EC2 instances with OpenVPN installed. What are 2 services that can help?":
-        ""},
+    {"You need to deploy multiple EC2 instances with OpenVPN installed. How can you achieve this?":
+        "Check the AWS marketplace for an official OpenVPN AMI or select a regular Linux AMI and bootstrap it yourself with an OpenVPN insallation and configuration."},
     {"You want to migrate VMWare VMs to EC2; What are two necessary steps?":
-        ""},
+        "Import the VM using VM Import/Export and select the imported VM from AWS Marketplace AMIs and launch the instance."},
     {"AWS CLI to launch EC2 fails with the error InvalidAMIID.NotFound - What probably happened?":
-        ""},
+        "You are probably in the wrong region. AMIs are specific to a region"},
     {"What tenancy provides complete physical isolation?":
-        ""},
+        "Only Dedicated Host offers complete isolation"},
     {"Normally your instances can handle traffic but you're expecting a spike; What 2 things could you do?":
-        ""},
+        "Reserve instances is cheaper in general but for sporradic workloads that only occur occasionally would be cheaper as on-demand, knowing it will scale down completely when not in use"},
     {"What's a cost effective use case for spot market instances?":
-        ""},
+        "Spot instances can be shut down with short (2 minute) warning, and aren't for reliably predictable applications"},
     {"What CANNOT be changed about an EC2 instance?":
-        ""},
+        "AMI cannot be changed, but type, security group, and IP can all be changed. Type requires a restart."},
     {"What's the most effective key/value combo convention for resource tags?":
-        ""},
+        "project1:server1"},
     {"What EBS option would be best for an applicaiton requiring 20k+ IOPS?":
-        ""},
+        "Provision-IOPS SSD are the only thing that gets close, at 64k"},
     {"Your org needs to produce a new 'Golden Image' AMI with auto-scaling from an existing volume. What 3 steps are necessary?":
-        ""},
+        "Create a snapshot of the EBS root volume, create an image from that, select your new AMI from your private collection. Then make an image of the EBS volume attached to the instance, select it and use it for your launch configuration. Finally, import the EBS snapshot into another AWS account to create an image. Use that new AMI for your launch config."},
     {"What are 2 benefits of instance store volumes?":
-        ""},
+        "Physically attached and thus faster. Also cheaper, incur no additional cost other than the instance itself"},
     {"Using AWS recommendations, suggest 2 private IP's to be used for an EC2 instance":
-        ""},
+        "172.17.23.43 and 10.0.32.176 ... 192 kinda works but 10 has the widest range"},
     {"What 3 data attributes can be considered to restrict EC2 access ":
-        ""},
+        "Ports, source, and destination are all available, not size"},
     {"In what 2 ways are IAM roles used to secure resoruce access for EC2 instances?":
-        ""},
+        "Source address "},
     {"In what 2 ways can you allow external network access from a private subnet through a public VPC?":
         ""},
     {"How do you securely authenticate to the GUI console of a Windows EC2 session?":
