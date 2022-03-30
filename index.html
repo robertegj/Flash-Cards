@@ -68,11 +68,11 @@ h1 {
     left: 0;
 }
 .lightgreen {
-    background: lightgreen;
+    background: lightgreen !important;
 }
 .red {
-    background: red;
-    color: white;
+    background: red !important;
+    color: white !important;
 }
 button {
     font-size: larger;
@@ -110,6 +110,8 @@ button {
                 <option value="saab">Saab</option>
                 <option value="fiat">Fiat</option>
                 <option value="Audi">Audi</option>
+                <option value="95">95</option>
+
               </select>
         </div>
 
@@ -383,7 +385,6 @@ function getJSON(url) {
     }
 
 function quizClicked(){
-
     loadQuiz(getJSON(this.value));
     document.getElementById("availableQuizes").style.display = "none";
 }

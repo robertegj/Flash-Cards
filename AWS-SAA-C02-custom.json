@@ -1,0 +1,16 @@
+{
+    "title":"AWS Certified Solutions Architect SAA-C02",
+    "questions" : [
+    { "What is Amazon CloudHSM?":
+        "CloudHSM (HSM is hardware security module) can launch virtual compute clusters for crytography"}, 
+    { "What is AWS KMS?":
+        "Key Management Service for encryption keys. CloudTrail records all key-related events."},
+    { "What is CloudTrail?":
+        ""},
+    { "What is CloudWatch?":
+        ""},
+    { "What is EventBridge?":
+        ""},
+    { "":
+        ""}
+]}
