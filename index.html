@@ -106,12 +106,13 @@ button {
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">Count: <p id="completedCount" style="display:inline;"></p><p id="totalCount" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
-                <option value="volvo">Volvo</option>
+                <option value="osx">OSX</option>
                 <option value="saab">Saab</option>
                 <option value="fiat">Fiat</option>
-                <option value="Audi">Audi</option>
+                <option value="audi">Audi</option>
                 <option value="95">95</option>
-
+                <option value="xp">XP</option>
+                <option value="vista">Vista</option>
               </select>
         </div>
 
@@ -159,7 +160,7 @@ function toggleMarked(){
     }
 }    
 function swapStyleSheet(sheet) {
-    sheet = sheet + ".css";
+    sheet = "assets/" + sheet + ".css";
     var element = document.createElement("link");
     element.setAttribute("rel", "stylesheet");
     element.setAttribute("type", "text/css");
@@ -170,6 +171,7 @@ function changeTheme(){
     var theme = document.getElementById("theme").value;
     localStorage["theme"] = theme;
     swapStyleSheet(theme);
+    //document.location.reload();
 }
 // Multi Card or Single Card view change function
 function changeView(btn){
@@ -385,12 +387,12 @@ function getJSON(url) {
     }
 
 function quizClicked(){
-    loadQuiz(getJSON(this.value));
+    loadQuiz(getJSON("cards/" + this.value));
     document.getElementById("availableQuizes").style.display = "none";
 }
 
 function loadQuizes(){
-    var availableQuizes = JSON.parse(getJSON('./manifest.json'));
+    var availableQuizes = JSON.parse(getJSON('./cards/manifest.json'));
     //console.log(availableQuizes);
     //console.log(typeof(availableQuizes))
     for (var x = 0; x < availableQuizes["quizes"].length; x++){
