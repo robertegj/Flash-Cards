@@ -1,88 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-#card-deck, #availableQuizes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-#card-deck {
-    margin-top: 3em;
-}
-#quizInput {
-    width: 100%;
-    height: 50vh;
-}
-.quizCard, .card {
-    border: 1px solid black;
-    box-shadow: 3px 4px 4px 1px rgba(55,55,55, 0.5);
-    border-radius: 6px;
-    width: 90vw;
-    padding: 1em;
-    margin: 1em;
-    text-align: center;
-    cursor: pointer;
-}
-.quizCard:hover, .card:hover, button:hover{
-    filter: sepia(0.6);
-    box-shadow: 3px 4px 6px 1px rgba(55,55,55, 0.7);
-}
-.card {
-    font-size: 3em;
-    min-height: 50vh;
-}
-.card-font {
-    font-style: italic;
-}
-.card-back {
-    font-style: bold;
-}
-.hidden {
-    display: none;
-}
-h1 {
-    text-align: center;
-}
-#toolbelt {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background:rgba(55,55,55, 0.3);
-}
-#toolbelt  p{
-    margin: 0;
-}
-#progress {
-    background: green;
-    height: 2em;
-    border-right: 1px solid tan;
-    border-top: 1px solid yellow;
-    width: 0em;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
-.lightgreen {
-    background: lightgreen !important;
-}
-.red {
-    background: red !important;
-    color: white !important;
-}
-button {
-    font-size: larger;
-}
-</style>
+    <title>Rob's flash cards</title>
+    <style>
+    body {
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #card-deck, #availableQuizes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #card-deck {
+        margin-top: 3em;
+    }
+    #quizInput {
+        width: 100%;
+        height: 50vh;
+    }
+    .quizCard, .card {
+        border: 1px solid black;
+        box-shadow: 3px 4px 4px 1px rgba(55,55,55, 0.5);
+        border-radius: 6px;
+        width: 90vw;
+        padding: 1em;
+        margin: 1em;
+        text-align: center;
+        cursor: pointer;
+    }
+    .quizCard:hover, .card:hover, button:hover{
+        filter: sepia(0.6);
+        box-shadow: 3px 4px 6px 1px rgba(55,55,55, 0.7);
+    }
+    .card {
+        font-size: 3em;
+        min-height: 50vh;
+    }
+    .card-font {
+        font-style: italic;
+    }
+    .card-back {
+        font-style: bold;
+    }
+    .hidden {
+        display: none;
+    }
+    h1 {
+        text-align: center;
+    }
+    #toolbelt {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background:rgba(55,55,55, 0.3);
+    }
+    #toolbelt  p{
+        margin: 0;
+    }
+    #progress {
+        background: green;
+        height: 2em;
+        border-right: 1px solid tan;
+        border-top: 1px solid yellow;
+        width: 0em;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+    .lightgreen {
+        background: lightgreen !important;
+    }
+    .red {
+        background: red !important;
+        color: white !important;
+    }
+    button {
+        font-size: larger;
+    }
+    </style>
 </head>
 <body>
 
     <div id="availableQuizes">
-        <h1>Available Quizes</h1>
+        <h1>Available Cards</h1>
     </div>
 
     <div id="editQuiz">
@@ -90,6 +91,7 @@ button {
         <textarea id="quizInput" placeholder="Paste your quiz json here"></textarea>
         <br />
         <button onclick="startCustomQuiz()">Start Quiz</button>
+        <button onclick="if(confirm('Are you sure? This will reset ALL user data.')){localStorage.clear()}">Reset ALL</button>
     </div>
 
     <div id="quiz" style="display: none;">
@@ -411,6 +413,7 @@ function returnHome(){
     document.getElementById("card-deck").innerText ="";
     document.getElementById("quiz").style.display = "none";
     document.getElementById("availableQuizes").style.display = "flex";
+    document.getElementById("editQuiz").style.display = "inline";
 }
 
 loadQuizes();
