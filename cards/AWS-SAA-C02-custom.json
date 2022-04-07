@@ -1,5 +1,5 @@
 {
-    "title":"AWS Certified Solutions Architect SAA-C02",
+    "title":"AWS Certified Solutions Architect SAA-C02 Custom",
     "questions" : [
     { "What is Amazon CloudHSM?":
         "CloudHSM (HSM is hardware security module) can launch virtual compute clusters for crytography"}, 
@@ -12,5 +12,11 @@
     { "What is EventBridge?":
         ""},
     { "What is IAM?":
-        "Identify Access Management"}
+        "Identify Access Management"},
+    {"What is Amazon Cognos?":
+        ""},
+    {"What does S3 stand for?":
+        "Simple Storage Service"},
+    {"What is Amazon Cognito?":
+        "On-boarding automation, sign up/sign in"}
 ]}
