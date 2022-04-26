@@ -3,7 +3,11 @@
 <head>
     <title>Rob's flash cards</title>
     <style>
+    html {
+        height: 100%;
+    }
     body {
+        min-height: 100%;
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     #card-deck, #availableQuizes {
@@ -12,7 +16,7 @@
         justify-content: center;
     }
     #card-deck {
-        margin-top: 3em;
+        padding-top: 3em;
     }
     #quizInput {
         width: 100%;
@@ -48,14 +52,14 @@
     h1 {
         text-align: center;
     }
-    #toolbelt {
+    #toolbar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         background:rgba(55,55,55, 0.3);
     }
-    #toolbelt  p{
+    #toolbar  p{
         margin: 0;
     }
     #progress {
@@ -99,7 +103,7 @@
 
         </div>
 
-        <div id="toolbelt">
+        <div id="toolbar">
             <button onclick="returnHome()" style="float:right;height:2em;">Quizes</button>
             <button onclick="changeView(this)" id="changeViewButton" style="float:right;height:2em;">Multi Card</button>
             <button onclick="toggleMarked()" id="markedButton" style="float:right;height:2em;">Marked</button>
@@ -107,7 +111,7 @@
 
             <p style="display:inline;">Quiz: <p id="title" style="display:inline;">Flash Card 3000</p></p>
             <p style="display:inline;">Count: <p id="completedCount" style="display:inline;"></p><p id="totalCount" style="display:inline;">Flash Card 3000</p></p>
-            <p style="display:inline;">theme:</p><select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
+            <p style="display:inline;">Theme:</p> <select id="theme" name="theme" style="display:inline;" onchange="changeTheme();">
                 <option value="osx">OSX</option>
                 <option value="saab">Saab</option>
                 <option value="fiat">Fiat</option>

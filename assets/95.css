@@ -8,7 +8,11 @@ h1,h2,h3,h4,h5 {
     background: blue;
     color: white;
 }
-
+#toolbar {
+    background: #c0c0c0;
+    color: black;
+    font-weight: 600;
+}
 .card, .quizCard, .questionCard, button {
     background-color: #ccc;
     border-top: 3px solid white;

@@ -8,7 +8,7 @@ h1,h2,h3,h4,h5 {
     color: black;
 }
 .card, .quizCard, .questionCard, button {
-    background-color: rgba(250,250,250,0.1);
+    background-color: white;
     box-shadow: 3px 3px 4px 2px black;
 }
 button {
@@ -16,7 +16,7 @@ button {
     background: white;
     border: solid 1px black;
 }
-#toolbelt {
+#toolbar {
     background: #2662dd;
     color: white;
 }
