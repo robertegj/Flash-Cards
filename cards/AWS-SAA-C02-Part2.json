@@ -1,5 +1,5 @@
 {
-    "title":"AWS Certified Solutions Architect SAA-C02",
+    "title":"AWS Certified Solutions Architect SAA-C02 (Part 2)",
     "questions" : [
     {"You need to deploy multiple EC2 instances with OpenVPN installed. How can you achieve this?":
         "Check the AWS marketplace for an official OpenVPN AMI or select a regular Linux AMI and bootstrap it yourself with an OpenVPN insallation and configuration."},
