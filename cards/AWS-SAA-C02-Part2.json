@@ -42,9 +42,9 @@
     {"You have an EC2 auto-scaling group to use a launch configuration to install an app on several instances. Now you want it to install additional apps. What should you do?":
         "Modify the launch template would be the right answer but you'd have to made a copy as a launch configuration cannot be modified."}, 
     {"An auto-scaling policy has a minimum of 3, a max of 10 and a desired of 7. You delete 3 of the 7. What will auto-scaling attempt to do?":
-        ""}, 
-    {"You have a CPU spike at a certain time of week. You set up auto scaling to accommodate for this. What should you implement? (Choose X)":
-        ""}, 
+        "Create 3 instances. Auto-scaling policies will maintain the desired amount."}, 
+    {"You have a CPU spike at a certain time of week. You set up auto scaling to accommodate for this - adding additional instances at a scheduled time and increasing CPU as needed. What should you implement? (Choose 2)":
+        "Scheduled actions and step scaling policies."}, 
     {"What Systems Manager document enables you to manually take EBS snapshots of several hundred volumes?":
-        ""} 
+        "Automate. Even though they're called automation documents, they can be run manually."} 
 ]}
