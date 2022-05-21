@@ -28,19 +28,19 @@
     {"What 3 data attributes can be considered to restrict EC2 access ":
         "Ports, source, and destination are all available, not size"},
     {"In what 2 ways are IAM roles used to secure resoruce access for EC2 instances?":
-        "Source address "},
+        "A role can assign processes running on the EC2 instance permission to access other AWS resources. Also a role can give users and resources permission to access the/an EC2 instance."},
     {"In what 2 ways can you allow external network access from a private subnet through a public VPC?":
-        ""},
+        "NAT instances and NAT gateways can allow external network access from a private subnet through a public VPC."},
     {"How do you securely authenticate to the GUI console of a Windows EC2 session?":
-        ""},
+        "Use the private key of your key pair to retrieve the password you'll use to login."},
     {"Your app deployment includes multiple EC2 instances that require low latency. What AWS tool hep locate EC2 instances closest to eachother?":
-        ""},
+        "Placement groups let you locate EC2 physically near eachother."},
     {"To save config time and money you want your app to run only when called, scaling down after. What will do that for you?":
-        ""},
+        "AWS lambda will run only when called and will otherwise scale down."},
     {"What helps you quickly copy a VM from your infra into your AWS VPC?":
-        ""},  
-    {"You have an EC2 auto-scaling group to install an app on several instances. Now you want it to install additional apps. What should you do?":
-        ""}, 
+        "VM Import/Export will help you quickly copy a VM into/out of your infra to AWS VPC"},  
+    {"You have an EC2 auto-scaling group to use a launch configuration to install an app on several instances. Now you want it to install additional apps. What should you do?":
+        "Modify the launch template would be the right answer but you'd have to made a copy as a launch configuration cannot be modified."}, 
     {"An auto-scaling policy has a minimum of 3, a max of 10 and a desired of 7. You delete 3 of the 7. What will auto-scaling attempt to do?":
         ""}, 
     {"You have a CPU spike at a certain time of week. You set up auto scaling to accommodate for this. What should you implement? (Choose X)":
