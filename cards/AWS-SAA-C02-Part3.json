@@ -1,0 +1,50 @@
+{
+    "title":"AWS Certified Solutions Architect SAA-C02 (Part 3)",
+    "questions" : [
+    {"You need linux EC2 instances with low latency read/write to a single set of files. Which AWS service best fits this use case?":
+        ""},
+    {"You expect to be storing a large volume of data in many small increments. What's a limitation of S3 storage? (i.e. you are given limited amounts of X with S3)":
+        ""},
+    {"You have a publicly available file (named X) stored in an S3 bucket (named Y) - what's the URL?":
+        ""},
+    {"In the context of S3 what are prefixes and delimeters?":
+        ""},
+    {"Compliance requires event tracking from within S3 buckets - what 2 services might help with that?":
+        ""},
+    {"What 3 operational details are likely included within S3 server logs?":
+        ""},
+    {"What CANNOT be changed about an EC2 instance?":
+        ""},
+    {"What's the most effective key/value combo convention for resource tags?":
+        ""},
+    {"What EBS option would be best for an applicaiton requiring 20k+ IOPS?":
+        ""},
+    {"Your org needs to produce a new 'Golden Image' AMI with auto-scaling from an existing volume. What 3 steps are necessary?":
+        "Create a snapshot of the EBS root volume, create an image from that, select your new AMI from your private collection. Then make an image of the EBS volume attached to the instance, select it and use it for your launch configuration. Finally, import the EBS snapshot into another AWS account to create an image. Use that new AMI for your launch config."},
+    {"What are 2 benefits of instance store volumes?":
+        "Physically attached and thus faster. Also cheaper, incur no additional cost other than the instance itself"},
+    {"Using AWS recommendations, suggest 2 private IP's to be used for an EC2 instance":
+        "172.17.23.43 and 10.0.32.176 ... 192 kinda works but 10 has the widest range"},
+    {"What 3 data attributes can be considered to restrict EC2 access ":
+        "Ports, source, and destination are all available, not size"},
+    {"In what 2 ways are IAM roles used to secure resoruce access for EC2 instances?":
+        "A role can assign processes running on the EC2 instance permission to access other AWS resources. Also a role can give users and resources permission to access the/an EC2 instance."},
+    {"In what 2 ways can you allow external network access from a private subnet through a public VPC?":
+        "NAT instances and NAT gateways can allow external network access from a private subnet through a public VPC."},
+    {"How do you securely authenticate to the GUI console of a Windows EC2 session?":
+        "Use the private key of your key pair to retrieve the password you'll use to login."},
+    {"Your app deployment includes multiple EC2 instances that require low latency. What AWS tool hep locate EC2 instances closest to eachother?":
+        "Placement groups let you locate EC2 physically near eachother."},
+    {"To save config time and money you want your app to run only when called, scaling down after. What will do that for you?":
+        "AWS lambda will run only when called and will otherwise scale down."},
+    {"What helps you quickly copy a VM from your infra into your AWS VPC?":
+        "VM Import/Export will help you quickly copy a VM into/out of your infra to AWS VPC"},  
+    {"You have an EC2 auto-scaling group to use a launch configuration to install an app on several instances. Now you want it to install additional apps. What should you do?":
+        "Modify the launch template would be the right answer but you'd have to made a copy as a launch configuration cannot be modified."}, 
+    {"An auto-scaling policy has a minimum of 3, a max of 10 and a desired of 7. You delete 3 of the 7. What will auto-scaling attempt to do?":
+        "Create 3 instances. Auto-scaling policies will maintain the desired amount."}, 
+    {"You have a CPU spike at a certain time of week. You set up auto scaling to accommodate for this - adding additional instances at a scheduled time and increasing CPU as needed. What should you implement? (Choose 2)":
+        "Scheduled actions and step scaling policies."}, 
+    {"What Systems Manager document enables you to manually take EBS snapshots of several hundred volumes?":
+        "Automate. Even though they're called automation documents, they can be run manually."} 
+]}
